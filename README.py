@@ -83,7 +83,7 @@
 # 
 # 1. Abra o `Terminal Emulator`.
 # 
-# 2. **Adicione o repositório do GitHub CLI**: Execute o seguinte comando para adicionar o repositório oficial do GitHub CLI:
+# 2. **Adicione o repositório do `GitHub CLI`**: Execute o seguinte comando para adicionar o repositório oficial do `GitHub CLI`:
 # 
 #     ```
 #     sudo apt-add-repository -y ppa:git-core/ppa
@@ -95,21 +95,21 @@
 #     sudo apt update
 #     ```
 # 
-# 4. **Instale o GitHub CLI**: Agora, você pode instalar o GitHub CLI usando o comando:
+# 4. **Instale o `GitHub CLI`**: Agora, você pode instalar o `GitHub CLI` usando o comando:
 # 
 #     ```
 #     sudo apt install gh -y
 #     ```
 # 
-# 5. **Verifique a instalação**: Para garantir que o GitHub CLI foi instalado corretamente, você pode verificar a versão instalada com o comando:
+# 5. **Verifique a instalação**: Para garantir que o `GitHub CLI` foi instalado corretamente, você pode verificar a versão instalada com o comando:
 # 
 #     ```
 #     gh --version
 #     ```
 # 
-# Se tudo estiver correto, você verá a versão do GitHub CLI instalada em seu sistema. Agora você pode começar a usar o gh para interagir com seus repositórios do GitHub diretamente do terminal!
+# Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu sistema. Agora você pode começar a usar o gh para interagir com seus repositórios do `GitHub` diretamente do terminal!
 
-# ### 2. Autenticar no GitHub para usar o `GitHub CLI`
+# ### 2. Autenticar no `GitHub` para usar o `GitHub CLI`
 # 
 # 1. Digite o seguinte comando para iniciar o processo de autenticação:
 # 
@@ -162,47 +162,80 @@
 # 
 # ### 3.1 Comandos pelo `Git Hub CLI (Command Line Interface, CLI)` do `gh`
 # 
-# 1. Entrar na pasta do repositório que será enviado para o `Git`: `cd <nome_do_repositorio>`
+# 1. Entrar na pasta do repositório que será enviado para o `Git`:
+# 
+#     ```bash
+#     cd <nome_do_repositorio>
+#     ```
 # 
 #     Substitua `<nome_do_repositorio>` pelo nome que você deseja.
 # 
-# 2. Caso **NÃO** possua arquivo `README.md` já escrito e deseja adicionar um arquivo, execute o comando a seguir: `echo " <nome_do_repositorio>" >> README.md`
+# 2. Caso **NÃO** possua arquivo `README.md` já escrito e deseja adicionar um arquivo, execute o comando a seguir:
+# 
+#     ```bash
+#     echo " <nome_do_repositorio>" >> README.md
+#     ```
 # 
 #     Substitua `<nome_do_repositorio>` pelo nome que você deseja.
 # 
-# 3. **Inicializa um novo repositório `Git` no diretório atual**: `git init`
+# 3. **Inicializa um novo repositório `Git` no diretório atual**:
 # 
-# 4. **Criar o repositório**: Com o `GitHub CLI`, você pode criar um novo repositório usando: `gh repo create <nome-do-repositorio> --private`
+#     ```bash
+#     git init
+#     ```
+# 
+# 4. **Criar o repositório**: Com o `GitHub CLI`, você pode criar um novo repositório usando:
+# 
+#     ```bash
+#     gh repo create <nome-do-repositorio> --private
+#     ```
 # 
 #     Substitua `<nome-do-repositorio>` pelo nome que você deseja e use `--public` ou `--private` para definir a visibilidade do repositório.
 # 
-# 5. **Verificar as _branches_ locais**: Primeiro, verifique quais _branches_ existem no seu repositório local usando o comando `git branch`: `git branch`
+# 5. **Verificar as _branches_ locais**: Primeiro, verifique quais _branches_ existem no seu repositório local usando o comando
+# 
+#     ```bash
+#     git branch
+#     ```
 # 
 #     Isso lista todas as _branches_ locais.
 #     
-# 6. Certifique-se de que a `branch` `"main"` exista. Se não existir ou se não existir nenhuma, você pode criá-la a partir da `branch` atual ou mudar para ela usando: `git branch -M main`
+# 6. **Certifique-se de que a `branch` `"main"` exista**: Se não existir ou se não existir nenhuma, você pode criá-la a partir da `branch` atual ou mudar para ela usando:
+# 
+#     ```bash
+#     git branch -M main
+#     ```
 # 
 #     Isso cria uma nova `branch` `"main"` baseada na `branch` atual.
 # 
 # 7. **Atualizar a URL do Repositório Remoto**: Certifique-se de que a URL do seu repositório remoto esteja configurada para usar SSH:
 # 
-#     ```
-#     git remote set-url add origin git@github.com:edendenis/<nome-do-repositorio>.git
+#     ```bash
+#     git remote add origin git@github.com:edendenis/<nome-do-repositorio>.git
 #     ```
 # 
-# 8. **Adicionar um novo repositório remoto chamado `origin` ao seu repositório `Git` local**: O `origin` é o nome padrão usado para referir-se ao repositório remoto principal: `git add .`
+# 8. **Consultar se a URL do seu repositório local está configurada com o repositório remoto para usar SSH**:
 # 
-# 9. **Fazer um `commit`**: Após criar a `branch` `"main"`, você precisa fazer pelo menos um `commit` nela. Adicione arquivos, faça o `commit` e forneça uma mensagem de `commit`:
+#     ```
+#     git remote -v
+#     ```
+# 
+# 9. **Adicionar um novo repositório remoto chamado `origin` ao seu repositório `Git` local**: O `origin` é o nome padrão usado para referir-se ao repositório remoto principal:
 # 
 #     ```
 #     git add .
+#     ```
+# 
+# 9. **Fazer um `commit`**: Após criar a `branch` `"main"`, você precisa fazer pelo menos um `commit` nela. Adicione arquivos, faça o `commit` e forneça uma mensagem de `commit`:
+# 
+#     ```bash
 #     git commit -m "first commit within branch main"
 #     ```
 # 
 # 10. **Enviar seu repositório local para o `GitHub`**: Finalmente, envie seu repositório para o `GitHub`:
 # 
-#     ```
-#     git push -u origin main
+#     ```bash
+#     git push -u origin HEAD:main
 #     ```
 # 
 # Esses comandos permitem que você crie um repositório no `GitHub` e o gerencie completamente a partir da linha de comando.
