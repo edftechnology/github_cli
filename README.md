@@ -238,6 +238,41 @@ Agora, você deve ter criado um repositório no `GitHub` e autenticado sua conta
 Esses comandos permitem que você crie um repositório no `GitHub` e o gerencie completamente a partir da linha de comando.
 
 
+## 4. Consultar Repositórios no `GitHub` com o `GitHub CLI`
+
+Você pode consultar os repositórios diretamente pelo terminal. Aqui está como você pode fazer isso:
+
+1. **Listar seus repositórios no `GitHub`**: Após estar autenticado, você pode listar todos os repositórios associados à sua conta com o comando:
+
+    ```bash
+    gh repo list
+    ```
+    Esse comando irá listar todos os repositórios públicos e privados (dependendo das permissões de acesso) associados à sua conta `GitHub`.
+
+    O `GitHub CLI` (`gh`) mostra apenas 30 repositórios por vez por padrão. Para visualizar todos os seus repositórios, você pode adicionar o parâmetro `--limit` para aumentar o número de repositórios mostrados.
+
+    1.1 **Passo para listar todos os repositórios**:
+    
+    ```bash
+    gh repo list --limit 1000
+    ```
+
+    Isso deve mostrar até `1000` repositórios, se você os tiver.
+
+    Se você ainda não consegue ver todos os repositórios, pode realizar a paginação para listar todos.
+
+    1.2 Se você quiser listar repositórios de uma organização específica, você pode adicionar o nome da organização:
+
+    ```bash
+    gh repo list <organization-name>
+    ```
+
+4. **Filtrar repositórios**: Você também pode filtrar os repositórios usando a opção `--visibility` (para listar apenas públicos ou privados):
+
+    ```bash
+    gh repo list --visibility public
+    ```
+
 <!-- LICENÇA -->
 ## Licença
 
