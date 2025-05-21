@@ -237,7 +237,7 @@
 #     git branch -M main
 #     ```
 # 
-#     Isso cria uma nova `branch` `"main"` baseada na `branch` atual.
+#     Isso cria uma nova `branch main"` baseada na `branch` atual.
 # 
 # 7. **Atualizar a URL do Repositório Remoto**: Certifique-se de que a URL do seu repositório remoto esteja configurada para usar SSH:
 # 
