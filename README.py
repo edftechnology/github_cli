@@ -3,7 +3,7 @@
 
 # <!-- LOGOTIPO DO PROJETO -->
 # <div style="display: flex; justify-content: center;">
-#    <a href="https://github.com/edendenis/git">
+#    <a href="https://github.com/edendenis/github_cli">
 #      <img src="figures/gold_edf_technology_logo_transparent_background_and_gold_name.png" alt="Logo" width="160" height="160">
 #    </a>
 # </div>
@@ -19,14 +19,14 @@
 # <p align="center">
 #  Neste documento estão contidos os principais comandos para configurar/instalar/usar o `GitHub Command Line Interface (GitHub CLI)`.
 #  <br />
-#  <a href="https://github.com/edendenis/git"><strong>Explore os documentos »</strong></a>
+#  <a href="https://github.com/edendenis/github_cli"><strong>Explore os documentos »</strong></a>
 #  <br />
 #  <br />
-#  <a href="https://github.com/edendenis/git">Ver demonstração</a>
+#  <a href="https://github.com/edendenis/github_cli">Ver demonstração</a>
 #  ·
-#  <a href="https://github.com/edendenis/git">Relatar bug</a>
+#  <a href="https://github.com/edendenis/github_cli">Relatar bug</a>
 #  ·
-#  <a href="https://github.com/edendenis/git">Solicitar recurso</a>
+#  <a href="https://github.com/edendenis/github_cli">Solicitar recurso</a>
 # </p>
 # 
 
