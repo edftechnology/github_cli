@@ -113,25 +113,25 @@ Para instalar o `GitHub CLI` no `Linux Ubuntu` pelo `Terminal Emulator`, você p
 
 2. **Adicione o repositório do `GitHub CLI`**: Execute o seguinte comando para adicionar o repositório oficial do `GitHub CLI`:
 
-    ```
+    ```bash
     sudo apt-add-repository -y ppa:git-core/ppa
     ```
 
 3. **Atualize a lista de pacotes**: Após adicionar o repositório, atualize a lista de pacotes com o comando:
 
-    ```
+    ```bash
     sudo apt update
     ```
 
 4. **Instale o `GitHub CLI`**: Agora, você pode instalar o `GitHub CLI` usando o comando:
 
-    ```
+    ```bash
     sudo apt install gh -y
     ```
 
 5. **Verifique a instalação**: Para garantir que o `GitHub CLI` foi instalado corretamente, você pode verificar a versão instalada com o comando:
 
-    ```
+    ```bash
     gh --version
     ```
 
@@ -141,7 +141,7 @@ Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu 
 
 1. Digite o seguinte comando para iniciar o processo de autenticação:
 
-    ```
+    ```bash
     gh auth login
     ```
 
@@ -153,7 +153,7 @@ Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu 
 
 3. **Envie sua Chave Pública SSH**: O `Terminal Emulator` perguntará se você deseja enviar sua chave pública SSH para sua conta do `GitHub`. O caminho padrão geralmente é:
 
-    ```
+    ```bash
     /home/seu_usuario/.ssh/id_rsa.pub
     ```
 
@@ -163,7 +163,7 @@ Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu 
 
     4.2 Você verá um código de autenticação de uso único, por exemplo:
 
-    ```
+    ```bash
     First copy your one-time code: 4050-A33D
     ```
 
@@ -177,7 +177,7 @@ Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu 
 
 7. Configure o Protocolo Git: O `GitHub CLI` deve configurar automaticamente o protocolo Git. Você verá uma mensagem de confirmação:
 
-    ```
+    ```bash
     ✓ Configured git protocol
     ```
 
