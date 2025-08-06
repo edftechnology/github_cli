@@ -273,7 +273,9 @@ Esses comandos permitem que você crie um repositório no `GitHub` e o gerencie 
 
 Você pode consultar os repositórios diretamente pelo terminal. Aqui está como você pode fazer isso:
 
-1. **Listar seus repositórios no `GitHub`**: Após estar autenticado, você pode listar todos os repositórios associados à sua conta com o comando:
+### 4.1 Listar seus repositórios no `GitHub`
+
+1. Após estar autenticado, você pode listar todos os repositórios associados à sua conta com o comando:
 
     ```bash
     gh repo list
@@ -282,27 +284,61 @@ Você pode consultar os repositórios diretamente pelo terminal. Aqui está como
 
     O `GitHub CLI` (`gh`) mostra apenas 30 repositórios por vez por padrão. Para visualizar todos os seus repositórios, você pode adicionar o parâmetro `--limit` para aumentar o número de repositórios mostrados.
 
-    1.1 **Passo para listar todos os repositórios**:
-    
-    ```bash
-    gh repo list --limit 1000
-    ```
 
-    Isso deve mostrar até `1000` repositórios, se você os tiver.
+### 4.2 Passo para listar os repositórios até uma determinada quantidade
 
-    Se você ainda não consegue ver todos os repositórios, pode realizar a paginação para listar todos.
+1. Para listar os repositórios até uma determinada quantidade, execute o
+comando abaixo:
 
-    1.2 Se você quiser listar repositórios de uma organização específica, você pode adicionar o nome da organização:
+```bash
+gh repo list --limit 1000
+```
 
-    ```bash
-    gh repo list <organization-name>
-    ```
+Isso deve mostrar até `1000` repositórios, se você os tiver.
 
-4. **Filtrar repositórios**: Você também pode filtrar os repositórios usando a opção `--visibility` (para listar apenas públicos ou privados):
+Se você ainda não consegue ver todos os repositórios, pode realizar a paginação para listar todos.
 
-    ```bash
-    gh repo list --visibility public
-    ```
+
+### 4.3 Listar repositórios de uma organização específica, você pode adicionar o nome da organização
+
+1. Para listar repositórios de uma organização específica, você pode adicionar o nome da organização,
+execute o comando abaixo:
+
+```bash
+gh repo list <organization-name>
+```
+
+### 4.4 Filtar os repositórios pelo tipo (públicos ou privados)
+
+1. **Filtrar repositórios**: Você também pode filtrar os repositórios usando a opção `--visibility` (para listar apenas públicos ou privados):
+
+```bash
+gh repo list --visibility public
+```
+
+### 4.5 Filtrar Repositórios com grep:
+
+Para filtrar os repositórios com a palavra-chave, por exemplo `latex*`, você pode usar o comando
+`grep` para encontrar repositórios cujo nome comece com `latex` (ou qualquer coisa que siga `latex`):
+
+```bash
+gh repo list --limit 1000 | grep -i "^latex"
+```
+
+- `-i`: Faz a busca ser case-insensitive, ou seja, irá buscar `latex`, `Latex`, `LATEX` etc.
+
+- `^latex`: O `^` significa que a busca deve começar com a palavra latex. Se você quiser que a busca
+seja em qualquer parte do nome do repositório, pode remover o `^`.
+
+
+### 4.6 Filtrar por qualquer parte do nome (se necessário)
+
+Se você quiser buscar por qualquer repositório que contenha `latex` em qualquer parte do nome, basta
+fazer:
+
+```bash
+gh repo list --limit 1000 | grep -i "latex"
+```
 
 <!-- LICENÇA -->
 ## Licença
