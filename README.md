@@ -304,6 +304,76 @@ Você pode consultar os repositórios diretamente pelo terminal. Aqui está como
     gh repo list --visibility public
     ```
 
+## 5. Proteção de Branch e Gestão de Colaboradores no GitHub
+
+### 5.1 Proteção de Branch no GitHub
+No GitHub, vá no repositório → **Settings** → **Branches** → *Branch protection rules* e crie uma regra para a branch principal (`main` ou `master`):
+
+- **Require pull request reviews before merging** – obriga que alterações passem por PR com revisão.
+- **Require status checks to pass before merging** – exige que checagens (ex.: testes de CI) passem antes do merge.
+- **Include administrators** – se marcado, até administradores precisam seguir a regra.
+- **Restrict who can push to matching branches** – limita quem pode fazer `push` direto.
+- **Prevent force pushes** – bloqueia `git push --force`.
+- **Prevent deletion** – impede a exclusão da branch protegida.
+
+⚠️ Dica: proteja sempre a branch principal. Outras branches podem ter regras menos rígidas.
+
+### 5.2 Controle de permissões por colaborador ou team
+Em **Settings → Manage Access**, defina o nível de acesso:
+
+| Role | O que pode fazer |
+| --- | --- |
+| **Admin** | Controle total, inclusive deletar o repositório. |
+| **Maintainer (Org)** | Administração de repositórios da organização. |
+| **Write** | Fazer push, criar branches e abrir PR. |
+| **Triage** | Criar issues e PRs, sem push. |
+| **Read** | Apenas leitura. |
+
+Para evitar que colaboradores alterem `main`, conceda permissões **Write** ou **Triage**, não **Admin**.
+
+### 5.3 Proteger repositórios inteiros na organização
+Em repositórios de uma organização, acesse **Organization Settings → Repository settings** para aplicar políticas globais, como:
+
+- Requerer proteção de branch.
+- Restringir deleção de branches.
+- Obrigar merges via PR.
+
+### 5.4 Proteger branch com GitHub CLI
+Você pode configurar a proteção via GitHub CLI:
+
+```bash
+gh api -X PUT   -H "Accept: application/vnd.github.v3+json"   /repos/<owner>/<repo>/branches/<branch>/protection   -f required_status_checks=null   -f enforce_admins=true   -f restrictions='{"users":[],"teams":[]}'   -f allow_force_pushes=false   -f allow_deletions=false
+```
+
+**Campos**:
+- `<owner>` – dono do repositório.
+- `<repo>` – nome do repositório.
+- `<branch>` – branch a proteger.
+- `allow_force_pushes=false` – bloqueia `git push --force`.
+- `allow_deletions=false` – impede deletar a branch.
+- `restrictions` vazio mantém permissões atuais.
+
+**Exemplo**: proteger a branch `main` do repo `edftechnology/coolprop`.
+
+### 5.5 Adicionar colaborador com GitHub CLI
+Para convidar alguém:
+
+```bash
+gh repo add-collaborator <OWNER>/<REPO> <USERNAME> --permission <PERMISSION>
+```
+
+Permissões disponíveis: `pull`, `triage`, `push`, `maintain`, `admin`.
+
+Exemplo:
+
+```bash
+gh repo add-collaborator edendenis/myrepo johndoe --permission push
+```
+
+O usuário recebe um convite e precisa aceitá-lo no GitHub.
+
+
+
 <!-- LICENÇA -->
 ## Licença
 
@@ -386,5 +456,6 @@ Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
 [1] OPENAI. ***Instalação do github cli.*** Disponível em: <https://chatgpt.com/c/67042c07-816c-8002-8913-7c8cdbc167a9> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
 
 [2] OPENAI. ***Vs code: editor popular:*** Disponível em: <https://chat.openai.com/c/b640a25d-f8e3-4922-8a3b-ed74a2657e42> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
+
 
 

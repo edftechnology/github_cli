@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 # <!-- LOGOTIPO DO PROJETO -->
 # <div style="display: flex; justify-content: center;">
 #    <a href="https://github.com/edendenis/github_cli">
@@ -28,8 +25,6 @@
 #  ·
 #  <a href="https://github.com/edendenis/github_cli">Solicitar recurso</a>
 # </p>
-# 
-
 # # Configurar/Instalar/Usar o `GitHub Command Line Interface (GitHub CLI)` e descrição dos seus principais comandos
 # 
 # ## Resumo
@@ -39,8 +34,6 @@
 # ## _Abstract_
 # 
 # _This document contains the main commands for configuring/installing/using the `GitHub Command Line Interface (GitHub CLI)`._
-# 
-
 # ## Descrição [2]
 # 
 # ### `Git`
@@ -50,7 +43,6 @@
 # ### `GitHub Command Line Interface (GitHub CLI)`
 # 
 # O `GitHub Command Line Interface (GitHub CLI)` é uma ferramenta de linha de comando que permite aos usuários interagir com o GitHub diretamente pelo terminal, facilitando o gerenciamento de repositórios e a execução de tarefas comuns sem a necessidade de usar a interface web. Com o GitHub CLI, os usuários podem clonar repositórios, criar e gerenciar pull requests, visualizar problemas, e até mesmo publicar projetos, tudo através de comandos simples. Essa interface é especialmente útil para desenvolvedores que preferem trabalhar no terminal e desejam integrar suas operações no GitHub ao fluxo de trabalho de linha de comando, tornando o processo mais eficiente e produtivo.
-
 # ## 1. Configurar/Instalar/usar o `Git` [1]
 # 
 # ## 1.1 Configurar/Instalar/usar o `Git` no `Linux Ubuntu`
@@ -58,8 +50,6 @@
 # Para configurar/instalar/usar o `Git` no `Linux Ubuntu`, você pode seguir estas etapas:
 # 
 # 1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando: `Ctrl + Alt + T`
-# 
-
 # 2. Certifique-se de que seu sistema esteja limpo e atualizado.
 # 
 #     2.1 Limpar o `cache` do gerenciador de pacotes `apt`. Especificamente, ele remove todos os arquivos de pacotes (`.deb`) baixados pelo `apt` e armazenados em `/var/cache/apt/archives/`. Digite o seguinte comando:
@@ -109,7 +99,6 @@
 #     ```bash
 #     sudo apt full-upgrade -y
 #     ```
-
 # Para instalar o `GitHub CLI` no `Linux Ubuntu` pelo `Terminal Emulator`, você pode seguir os seguintes passos:
 # 
 # 1. Abra o `Terminal Emulator`.
@@ -139,7 +128,6 @@
 #     ```
 # 
 # Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu sistema. Agora você pode começar a usar o gh para interagir com seus repositórios do `GitHub` diretamente do terminal!
-
 # ### 2. Autenticar no `GitHub` para usar o `GitHub CLI`
 # 
 # 1. Digite o seguinte comando para iniciar o processo de autenticação:
@@ -187,8 +175,6 @@
 # 8. **Erros Possíveis**: Se aparecer um erro como `HTTP 422: Validation Failed`, isso pode indicar que a chave SSH já está em uso. Nesse caso, verifique se a chave pública já está adicionada à sua conta do `GitHub`.
 # 
 # Agora, você deve ter criado um repositório no `GitHub` e autenticado sua conta com sucesso usando o `GitHub CLI`! Se tiver alguma dúvida ou se algo não funcionar como esperado, sinta-se à vontade para perguntar.
-# 
-
 # ## 3 Criar repositório e enviar os arquivos e pastas
 # 
 # ### 3.1 Comandos pelo `Git Hub CLI (Command Line Interface, CLI)` do `gh`
@@ -270,8 +256,6 @@
 #     ```
 # 
 # Esses comandos permitem que você crie um repositório no `GitHub` e o gerencie completamente a partir da linha de comando.
-# 
-
 # ## 4. Consultar Repositórios no `GitHub` com o `GitHub CLI`
 # 
 # Você pode consultar os repositórios diretamente pelo terminal. Aqui está como você pode fazer isso:
@@ -306,14 +290,80 @@
 #     ```bash
 #     gh repo list --visibility public
 #     ```
-
+# ## 5. Proteção de Branch e Gestão de Colaboradores no GitHub
+# 
+# ### 5.1 Proteção de Branch no GitHub
+# No GitHub, vá no repositório → **Settings** → **Branches** → *Branch protection rules* e crie uma regra para a branch principal (`main` ou `master`):
+# 
+# - **Require pull request reviews before merging** – obriga que alterações passem por PR com revisão.
+# - **Require status checks to pass before merging** – exige que checagens (ex.: testes de CI) passem antes do merge.
+# - **Include administrators** – se marcado, até administradores precisam seguir a regra.
+# - **Restrict who can push to matching branches** – limita quem pode fazer `push` direto.
+# - **Prevent force pushes** – bloqueia `git push --force`.
+# - **Prevent deletion** – impede a exclusão da branch protegida.
+# 
+# ⚠️ Dica: proteja sempre a branch principal. Outras branches podem ter regras menos rígidas.
+# 
+# ### 5.2 Controle de permissões por colaborador ou team
+# Em **Settings → Manage Access**, defina o nível de acesso:
+# 
+# | Role | O que pode fazer |
+# | --- | --- |
+# | **Admin** | Controle total, inclusive deletar o repositório. |
+# | **Maintainer (Org)** | Administração de repositórios da organização. |
+# | **Write** | Fazer push, criar branches e abrir PR. |
+# | **Triage** | Criar issues e PRs, sem push. |
+# | **Read** | Apenas leitura. |
+# 
+# Para evitar que colaboradores alterem `main`, conceda permissões **Write** ou **Triage**, não **Admin**.
+# 
+# ### 5.3 Proteger repositórios inteiros na organização
+# Em repositórios de uma organização, acesse **Organization Settings → Repository settings** para aplicar políticas globais, como:
+# 
+# - Requerer proteção de branch.
+# - Restringir deleção de branches.
+# - Obrigar merges via PR.
+# 
+# ### 5.4 Proteger branch com GitHub CLI
+# Você pode configurar a proteção via GitHub CLI:
+# 
+# ```bash
+# gh api -X PUT   -H "Accept: application/vnd.github.v3+json"   /repos/<owner>/<repo>/branches/<branch>/protection   -f required_status_checks=null   -f enforce_admins=true   -f restrictions='{"users":[],"teams":[]}'   -f allow_force_pushes=false   -f allow_deletions=false
+# ```
+# 
+# **Campos**:
+# - `<owner>` – dono do repositório.
+# - `<repo>` – nome do repositório.
+# - `<branch>` – branch a proteger.
+# - `allow_force_pushes=false` – bloqueia `git push --force`.
+# - `allow_deletions=false` – impede deletar a branch.
+# - `restrictions` vazio mantém permissões atuais.
+# 
+# **Exemplo**: proteger a branch `main` do repo `edftechnology/coolprop`.
+# 
+# ### 5.5 Adicionar colaborador com GitHub CLI
+# Para convidar alguém:
+# 
+# ```bash
+# gh repo add-collaborator <OWNER>/<REPO> <USERNAME> --permission <PERMISSION>
+# ```
+# 
+# Permissões disponíveis: `pull`, `triage`, `push`, `maintain`, `admin`.
+# 
+# Exemplo:
+# 
+# ```bash
+# gh repo add-collaborator edendenis/myrepo johndoe --permission push
+# ```
+# 
+# O usuário recebe um convite e precisa aceitá-lo no GitHub.
+# 
 # <!-- LICENÇA -->
 # ## Licença
 # 
 # Distribuído sob a licença MIT. Consulte `LICENSE.txt` para obter mais informações.
 # 
 # <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-
 # <!-- ROTEIRO -->
 # ## Roteiro
 # 
@@ -336,8 +386,6 @@
 # Consulte os [problemas abertos](https://github.com/edendenis/google_chrome/issues) para obter uma lista completa dos recursos propostos (e problemas conhecidos).
 # 
 # <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-# 
-
 # <!-- CONTRIBUIÇÔES -->
 # ## Contribuições
 # 
@@ -358,8 +406,6 @@
 # 5. Abra uma solicitação `pull`
 # 
 # <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-# 
-
 # <!-- ACKNOWLEDGMENTS -->
 # ## Agradecimentos
 # 
@@ -382,12 +428,9 @@
 # * [React Icons](https://react-icons.github.io/react-icons/search)
 # 
 # <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
-# 
-
 # ## Referências
 # 
 # [1] OPENAI. ***Instalação do github cli.*** Disponível em: <https://chatgpt.com/c/67042c07-816c-8002-8913-7c8cdbc167a9> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
 # 
 # [2] OPENAI. ***Vs code: editor popular:*** Disponível em: <https://chat.openai.com/c/b640a25d-f8e3-4922-8a3b-ed74a2657e42> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
-# 
 # 
