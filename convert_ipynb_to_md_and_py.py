@@ -26,8 +26,13 @@
 
 # %%
 import os
-from nbconvert import MarkdownExporter, PythonExporter
-import nbformat
+import json
+
+try:
+    from nbconvert import MarkdownExporter, PythonExporter  # type: ignore
+    _HAVE_NBCONVERT = True
+except Exception:  # pragma: no cover - fallback when nbconvert is missing
+    _HAVE_NBCONVERT = False
 
 # Definindo o nome do arquivo que deve ser excluído das subpastas
 excluded_file = 'convert_ipynb_to_md.ipynb'
@@ -35,48 +40,70 @@ excluded_file = 'convert_ipynb_to_md.ipynb'
 # Obtendo o caminho absoluto da pasta raiz
 root_path = os.path.abspath('.')
 
+# Funções auxiliares para converter sem nbconvert
+def _convert_with_nbconvert(full_path: str) -> None:
+    markdown_exporter = MarkdownExporter()
+    python_exporter = PythonExporter()
+
+    markdown_code, _ = markdown_exporter.from_filename(full_path)
+    python_code, _ = python_exporter.from_filename(full_path)
+
+    markdown_output_filename = full_path.replace('.ipynb', '.md')
+    python_output_filename = full_path.replace('.ipynb', '.py')
+
+    with open(markdown_output_filename, 'w', encoding='utf-8') as file:
+        file.write(markdown_code)
+    with open(python_output_filename, 'w', encoding='utf-8') as file:
+        file.write(python_code)
+
+    print(f'{full_path} was successfully converted to {markdown_output_filename} and {python_output_filename}')
+
+
+def _convert_fallback(full_path: str) -> None:
+    with open(full_path, 'r', encoding='utf-8') as file:
+        nb = json.load(file)
+
+    md_lines: list[str] = []
+    py_lines: list[str] = []
+
+    for cell in nb.get('cells', []):
+        source = ''.join(cell.get('source', []))
+        if cell.get('cell_type') == 'markdown':
+            md_lines.append(source + '\n\n')
+            for line in source.splitlines():
+                py_lines.append('# ' + line + '\n')
+        elif cell.get('cell_type') == 'code':
+            md_lines.append('```python\n' + source + '\n```\n\n')
+            py_lines.append('\n' + source + '\n')
+
+    markdown_output_filename = full_path.replace('.ipynb', '.md')
+    python_output_filename = full_path.replace('.ipynb', '.py')
+
+    with open(markdown_output_filename, 'w', encoding='utf-8') as file:
+        file.writelines(md_lines)
+    with open(python_output_filename, 'w', encoding='utf-8') as file:
+        file.writelines(py_lines)
+
+    print(f'{full_path} was successfully converted to {markdown_output_filename} and {python_output_filename} (fallback)')
+
+
+def convert_file(full_path: str) -> None:
+    if _HAVE_NBCONVERT:
+        _convert_with_nbconvert(full_path)
+    else:
+        _convert_fallback(full_path)
+
+
 # Percorrendo todos os diretórios e subdiretórios a partir da pasta atual
 for dirpath, dirnames, filenames in os.walk('.'):
     for filename in filenames:
-        # Construindo o caminho completo do arquivo
         full_path = os.path.join(dirpath, filename)
 
         if filename == 'README.ipynb':
-            try:
-                # Tentando ler o arquivo .ipynb para verificar se é um JSON válido
-                with open(full_path, 'r') as file:
-                    nbformat.read(file, as_version=4)
-
-                # Criando um objeto MarkdownExporter
-                markdown_exporter = MarkdownExporter()
-                # Criando um objeto PythonExporter
-                python_exporter = PythonExporter()
-
-                # Exportando o arquivo .ipynb para código Markdown
-                markdown_code, _ = markdown_exporter.from_filename(full_path)
-                # Exportando o arquivo .ipynb para código Python
-                python_code, _ = python_exporter.from_filename(full_path)
-
-                # Definindo o nome do arquivo de saída .md
-                markdown_output_filename = full_path.replace('.ipynb', '.md')
-                # Definindo o nome do arquivo de saída .py
-                python_output_filename = full_path.replace('.ipynb', '.py')
-
-                # Escrevendo o código Markdown no arquivo de saída
-                with open(markdown_output_filename, 'w') as file:
-                    file.write(markdown_code)
-                # Escrevendo o código Python no arquivo de saída
-                with open(python_output_filename, 'w') as file:
-                    file.write(python_code)
-
-                print(f'{full_path} was successfully converted to {markdown_output_filename} and {python_output_filename}')
-
-            except nbformat.reader.NotJSONError as e:
-                print(f'Error processing {full_path}: File is not valid JSON - {e}')
+            convert_file(full_path)
 
         # Verificando se o arquivo é o que deve ser excluído e se não está na pasta raiz
         elif filename == excluded_file and os.path.abspath(dirpath) != root_path:
-            # Excluindo o arquivo
             os.remove(full_path)
             print(f'Deleted file: {full_path}')
 
