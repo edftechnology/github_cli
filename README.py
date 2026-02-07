@@ -4,7 +4,7 @@
 # <!-- LOGOTIPO DO PROJETO -->
 # <div style="display: flex; justify-content: center;">
 #    <a href="https://github.com/edendenis/github_cli">
-#      <img src="figures/gold_edf_technology_logo_transparent_background_and_gold_name.png" alt="Logo" width="160" height="160">
+#      <img src="docs/figures/gold_edf_technology_logo_transparent_background_and_gold_name.png" alt="Logo" width="160" height="160">
 #    </a>
 # </div>
 # 
