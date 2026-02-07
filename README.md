@@ -54,7 +54,11 @@ O `GitHub Command Line Interface (GitHub CLI)` é uma ferramenta de linha de com
 
 Para configurar/instalar/usar o `Git` no `Linux Ubuntu`, você pode seguir estas etapas:
 
-1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando: `Ctrl + Alt + T`
+1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando:
+
+    ```bash
+    Ctrl + Alt + T
+    ```
 
 
 2. Certifique-se de que seu sistema esteja limpo e atualizado.
@@ -109,7 +113,11 @@ Para configurar/instalar/usar o `Git` no `Linux Ubuntu`, você pode seguir estas
 
 Para instalar o `GitHub CLI` no `Linux Ubuntu` pelo `Terminal Emulator`, você pode seguir os seguintes passos:
 
-1. Abra o `Terminal Emulator`.
+1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando:
+
+    ```bash
+    Ctrl + Alt + T
+    ```
 
 2. **Adicione o repositório do `GitHub CLI`**: Execute o seguinte comando para adicionar o repositório oficial do `GitHub CLI`:
 
@@ -178,7 +186,7 @@ Se tudo estiver correto, você verá a versão do `GitHub CLI` instalada em seu 
 7. Configure o Protocolo Git: O `GitHub CLI` deve configurar automaticamente o protocolo Git. Você verá uma mensagem de confirmação:
 
     ```bash
-    ✓ Configured git protocol
+    Configured git protocol
     ```
 
 8. **Erros Possíveis**: Se aparecer um erro como `HTTP 422: Validation Failed`, isso pode indicar que a chave SSH já está em uso. Nesse caso, verifique se a chave pública já está adicionada à sua conta do `GitHub`.
@@ -244,13 +252,13 @@ Agora, você deve ter criado um repositório no `GitHub` e autenticado sua conta
 
 8. **Consultar se a URL do seu repositório local está configurada com o repositório remoto para usar SSH**:
 
-    ```
+    ```bash
     git remote -v
     ```
 
 9. **Adicionar um novo repositório remoto chamado `origin` ao seu repositório `Git` local**: O `origin` é o nome padrão usado para referir-se ao repositório remoto principal:
 
-    ```
+    ```bash
     git add .
     ```
 
@@ -340,10 +348,11 @@ fazer:
 gh repo list --limit 1000 | grep -i "latex"
 ```
 
-## 5. Proteção de Branch e Gestão de Colaboradores no GitHub
+## 5. Proteção de `Branch` e Gestão de Colaboradores no `GitHub`
 
-### 5.1 Proteção de Branch no GitHub
-No GitHub, vá no repositório → **Settings** → **Branches** → *Branch protection rules* e crie uma regra para a branch principal (`main` ou `master`):
+### 5.1 Proteção de Branch no `GitHub`
+
+No `GitHub`, vá no repositório → **Settings** → **Branches** → *Branch protection rules* e crie uma regra para a branch principal (`main` ou `master`):
 
 - **Require pull request reviews before merging** – obriga que alterações passem por PR com revisão.
 - **Require status checks to pass before merging** – exige que checagens (ex.: testes de CI) passem antes do merge.
@@ -352,9 +361,10 @@ No GitHub, vá no repositório → **Settings** → **Branches** → *Branch pro
 - **Prevent force pushes** – bloqueia `git push --force`.
 - **Prevent deletion** – impede a exclusão da branch protegida.
 
-⚠️ Dica: proteja sempre a branch principal. Outras branches podem ter regras menos rígidas.
+**Dica**: proteja sempre a branch principal. Outras branches podem ter regras menos rígidas.
 
 ### 5.2 Controle de permissões por colaborador ou team
+
 Em **Settings → Manage Access**, defina o nível de acesso:
 
 | Role | O que pode fazer |
@@ -489,9 +499,8 @@ Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
 
 ## Referências
 
-[1] OPENAI. ***Instalação do github cli.*** Disponível em: <https://chatgpt.com/c/67042c07-816c-8002-8913-7c8cdbc167a9> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
+[1] OPENAI. ***Instalar o `github cli` no `linux ubuntu` pelo `terminal emulator`.*** Disponível em: <https://chatgpt.com/c/67042c07-816c-8002-8913-7c8cdbc167a9> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
 
 [2] OPENAI. ***Vs code: editor popular:*** Disponível em: <https://chat.openai.com/c/b640a25d-f8e3-4922-8a3b-ed74a2657e42> (texto adaptado). ChatGPT. Acessado em: 07/10/2024 15:49.
-
 
 
