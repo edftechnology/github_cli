@@ -54,7 +54,7 @@ O `GitHub Command Line Interface (GitHub CLI)` é uma ferramenta de linha de com
 
 Para configurar/instalar/usar o `Git` no `Linux Ubuntu`, você pode seguir estas etapas:
 
-1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando:
+1. Abrir o `Terminal Emulator`. Você pode fazer isso pressionando:
 
     ```bash
     Ctrl + Alt + T
@@ -113,7 +113,7 @@ Para configurar/instalar/usar o `Git` no `Linux Ubuntu`, você pode seguir estas
 
 Para instalar o `GitHub CLI` no `Linux Ubuntu` pelo `Terminal Emulator`, você pode seguir os seguintes passos:
 
-1. Abra o `Terminal Emulator`. Você pode fazer isso pressionando:
+1. Abrir o `Terminal Emulator`. Você pode fazer isso pressionando:
 
     ```bash
     Ctrl + Alt + T
